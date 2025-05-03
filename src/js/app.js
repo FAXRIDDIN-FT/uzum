@@ -1,94 +1,91 @@
-const BASE_URL = "https://dummyjson.com";
-const skeletonEl = document.querySelector(".skeleton");
-const wrapperEl = document.querySelector(".wrapper");
+import { fetchData } from "./main.js"
+const skeletonEl = document.querySelector(".skeleton")
+const wrapperEl = document.querySelector(".wrapper")
+const collectionEl = document.querySelector(".collection")
+const btnSeemoreEl = document.querySelector(".btn-seemore")
 
-function renderProducts(data) {
-  const fragment = document.createDocumentFragment();
-
-  data.products.forEach((products) => {
-    let card = document.createElement("div");
-    card.className = "card";
-    card.dataset.id = products.id;
-    card.innerHTML = `
-            <img name="card-image" src=${products.thumbnail} alt=${products.title}>
-            <h4>katta savdo</h4>
+function renderRecipe(data){
+    const fragment = document.createDocumentFragment()
+    data.products.forEach((products)=>{
+        let card = document.createElement("div")
+        card.className = "card"
+        card.dataset.id = products.id
+        card.innerHTML = `
+            <div>
+                <img name="card-image" src=${products.thumbnail} alt=${products.title}>
+            </div>
             <h3>${products.title}</h3>
             <p>${products.category}</p>
             <b>${products.price}</b>
-        `;
-    fragment.appendChild(card);
-  });
-  wrapperEl.appendChild(fragment);
+        `
+        fragment.appendChild(card)
+    })
+    wrapperEl.appendChild(fragment)
 }
 
-function fetchData(endpoint) {
-  fetch(`${BASE_URL}${endpoint}`)
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error("something went wrong :(");
-      }
-      return res.json();
-    })
-    .then((data) => {
-      renderProducts(data);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-    .finally(() => {
-      // loadingEl.style.display = "none"
-      skeletonEl.style.display = "none";
-    });
-}
 
-function renderSkeleton(count) {
-  const fragment = document.createDocumentFragment();
-  Array(count)
-    .fill("")
-    .forEach(() => {
-      let skeletonItem = document.createElement("div");
-      skeletonItem.className = "skeleton__item";
-      skeletonItem.innerHTML = `
+function renderSkeleton(count){
+    const fragment = document.createDocumentFragment()
+    Array(count).fill("").forEach(()=>{
+        let skeletonItem = document.createElement("div")
+        skeletonItem.className = "skeleton__item"
+        skeletonItem.innerHTML = `
             <div class="skeleton__image skeleton__animation"></div>
             <div class="skeleton__text skeleton__animation"></div>
             <div class="skeleton__text skeleton__animation"></div>
-        `;
-      fragment.appendChild(skeletonItem);
-    });
-  skeletonEl.appendChild(fragment);
+        `
+        fragment.appendChild(skeletonItem)
+    })
+    skeletonEl.appendChild(fragment)
 }
 
-window.addEventListener("load", () => {
-  fetchData("/products");
-  renderSkeleton(20);
-});
+function hideSkeleton(){
+    skeletonEl.style.display = "none"
+}
+function showSkeleton(){
+    skeletonEl.style.display = "grid"
+}
 
-wrapperEl.addEventListener("click", (event) => {
-  let name = event.target.name;
-  if (name === "card-image") {
-    const id = event.target.closest(".card").dataset.id;
-    open(`/pages/products.html?q=${id}`, "_self");
-  }
-});
+function renderCategoryList(data){
+    data.forEach((tag)=> {
+        const li = document.createElement("li")
+        li.innerHTML = tag
+        collectionEl.appendChild(li)
+    })
+}
 
-// const titleEl = document.querySelector(".title")
+const perPageCount = 10
 
-// titleEl.addEventListener("click", ()=>{})
-// titleEl.onclick = ()=>{}
+window.addEventListener("load", ()=>{
+    fetchData(`/products?limit=${perPageCount}&skip=0`, renderRecipe,  hideSkeleton)
+    fetchData("/products/category-list", renderCategoryList, ()=>{})    
+    renderSkeleton(perPageCount)
+})
 
-// const titleEl = document.querySelector(".title")
+wrapperEl.addEventListener("click", (event)=>{
+    let name = event.target.name
+    if(name === "card-image"){
+        const id = event.target.closest(".card").dataset.id
+        open(`/src/pages/products.html?id=${id}`, "_self")
+    }
+})
 
-// titleEl.dataset.loremIpsum = "hello world"
+collectionEl.addEventListener("click", (event)=>{
+    if(event.target.tagName === "LI"){
+        wrapperEl.innerHTML = null
+        const tag = event.target.innerHTML  
+        if(tag === "All"){
+            fetchData(`/products?limit=${perPageCount}&skip=0`, renderRecipe,  hideSkeleton)
+        }else{
+            fetchData(`/products/category/${tag}?limit=${perPageCount}&skip=0`, renderRecipe,  hideSkeleton)
+        }
+    }
+})
 
-// console.log(titleEl.dataset.laylo);
-// console.log(titleEl.dataset.courseId);
-// console.log(titleEl.dataset.loremIpsum );
+let offset = 0 
 
-// const collection = document.querySelector(".collection")
-
-// // Event delegation
-// collection.addEventListener("click", (event)=>{
-//     if(event.target.tagName === "SPAN"){
-//         titleEl.innerHTML = event.target.innerHTML
-//     }
-// })
+btnSeemoreEl.addEventListener("click", ()=>{
+    showSkeleton()
+    offset++
+    fetchData(`/products?limit=${perPageCount}&skip=${offset * perPageCount}`, renderRecipe,  hideSkeleton)
+})

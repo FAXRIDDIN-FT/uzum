@@ -1,40 +1,23 @@
-const BASE_URL = "https://dummyjson.com";
-const box = document.querySelector(".box");
+import { fetchData } from "./main.js"
+const boxEl = document.querySelector(".box")
+const params = new URLSearchParams(location.search)
 
-function renderDetail(data) {
+function renderRecipeDetail (data){
   console.log(data);
-  
-  box.innerHTML = `
-  <div>
-      <img width="500" src=${data.image} alt="">
-  </div>
-  <div>
-      <h1>${data.name}</h1>
-  </div>
-  
-  `;
+  boxEl.innerHTML = `
+     <div>
+        <img src=${data.thumbnail} width="400" alt=${data.title}>
+      </div>
+      <div>
+        <h1>${data.description}</h1>
+        <p>${data.category}</p>
+      </div>
+  `
 }
+    
 
-function fetchData(endpoint) {
-  fetch(`${BASE_URL}${endpoint}`)
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error("something went wrong :(");
-      }
-      return res.json();
-    })
-    .then((data) => {
-      renderDetail(data);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-    .finally(() => {
-      loadingEl.style.display = "none"
-    });
+window.onload = ()=>{
+  const id = params.get("id")
+  fetchData(`/products/${id}`,renderRecipeDetail, ()=>{} )
+
 }
-
-window.addEventListener("load", () => {
-  let params = new URLSearchParams(location.search);
-  fetchData(`/products/${params.get("q")}`);
-});
