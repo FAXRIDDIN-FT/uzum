@@ -4,7 +4,9 @@
   max-width: 1240px;
   width: 100%;
 }
-
+.collection {
+  scrollbar-width: none;
+}
 * {
   margin: 0;
   padding: 0;
@@ -124,5 +126,111 @@
   100% {
     top: 24px;
     height: 32px;
+  }
+}
+.box {
+  margin-top: 80px;
+  max-width: 1300px;
+  display: flex;
+  justify-content: center;
+  img {
+    border: 1px solid #ddd;
+ 
+    height: 400px;
+  }
+}
+
+.cards {
+  width: 500px;
+
+  b {
+    font-size: 36px;
+    padding: 10px 10px;
+    font-weight: 800;
+  }
+}
+.chegirma {
+  display: flex;
+  del {
+    font-size: 16px;
+    padding: 0px 15px;
+    font-weight: 700;
+  }
+  p {
+    display: flex;
+    justify-content: center;
+    background: yellow;
+    max-width: 100px;
+    height: 30px;
+    border-radius: 8px;
+    font-weight: 700;
+    align-items: center;
+  }
+}
+.oy {
+  padding: 10px 10px;
+  border-top: 8px;
+  background: #ddd;
+  border: 1px solid #ddd;
+  width: 260px;
+  margin-top: 20px;
+  margin-left: 10px;
+  strong{
+    font-size: 20px;
+    font-weight: 800;
+  }
+}
+.tolov{
+  margin-left: 10px;
+  display: flex;
+  background:#Ddd;
+  width: 260px;
+  p{
+    font-size: 20px;
+    align-items: center;
+    border-radius: 8px;
+    padding: 5px 5px;
+    font-weight: 800;
+    display: flex;
+    justify-content: center;
+    background: yellow;
+  }
+  b{
+    font-size: 20px;
+  }
+}
+.wrappers{
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  background:#Ddd;
+  width: 280px;
+  padding: 10px 10px;
+}
+.btn{
+  button{
+    width: 280px;
+    background: dodgerblue;
+    height: 40px;
+    border-radius: 8px;
+    font-size: 20px;
+    color: #fff;
+    font-weight: 800;
+  }
+}
+.ditile_page{
+  h1{
+    font-size: 30px;
+    font-weight: 800;
+    background: #fff;
+  }
+  img{
+    width: 60%;
+    height: 350px;
+    margin-left: 190px;
+  }
+  p{
+    font-size: 20px;
+    
   }
 }

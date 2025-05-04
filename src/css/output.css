@@ -8,8 +8,6 @@
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
     --color-amber-200: oklch(92.4% 0.12 95.746);
-    --color-amber-950: oklch(27.9% 0.077 45.635);
-    --spacing: 0.25rem;
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
   }
@@ -187,6 +185,9 @@
   .mt-\[30px\] {
     margin-top: 30px;
   }
+  .mt-\[80px\] {
+    margin-top: 80px;
+  }
   .mr-\[20\%\] {
     margin-right: 20%;
   }
@@ -195,9 +196,6 @@
   }
   .grid {
     display: grid;
-  }
-  .table {
-    display: table;
   }
   .h-\[32px\] {
     height: 32px;
@@ -223,17 +221,8 @@
   .w-\[360px\] {
     width: 360px;
   }
-  .border-collapse {
-    border-collapse: collapse;
-  }
   .transform {
     transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
-  }
-  .cursor-pointer {
-    cursor: pointer;
-  }
-  .resize {
-    resize: both;
   }
   .items-center {
     align-items: center;
@@ -256,14 +245,8 @@
   .overflow-auto {
     overflow: auto;
   }
-  .overflow-hidden {
-    overflow: hidden;
-  }
-  .overflow-x-hidden {
-    overflow-x: hidden;
-  }
-  .overflow-y-hidden {
-    overflow-y: hidden;
+  .overflow-x-auto {
+    overflow-x: auto;
   }
   .rounded-\[10px\] {
     border-radius: 10px;
@@ -298,23 +281,17 @@
   .bg-amber-200 {
     background-color: var(--color-amber-200);
   }
-  .bg-amber-950 {
-    background-color: var(--color-amber-950);
-  }
   .px-\[10px\] {
     padding-inline: 10px;
+  }
+  .px-\[100px\] {
+    padding-inline: 100px;
   }
   .py-\[10px\] {
     padding-block: 10px;
   }
   .pr-\[10px\] {
     padding-right: 10px;
-  }
-  .pl-1 {
-    padding-left: calc(var(--spacing) * 1);
-  }
-  .pl-\[10px\] {
-    padding-left: 10px;
   }
   .text-\[14px\] {
     font-size: 14px;
@@ -329,15 +306,6 @@
   .text-nowrap {
     text-wrap: nowrap;
   }
-  .text-wrap {
-    text-wrap: wrap;
-  }
-  .whitespace-normal {
-    white-space: normal;
-  }
-  .whitespace-nowrap {
-    white-space: nowrap;
-  }
   .text-\[\#1F2026\] {
     color: #1F2026;
   }
@@ -347,17 +315,13 @@
   .text-\[\#595B66\] {
     color: #595B66;
   }
-  .underline {
-    text-decoration-line: underline;
-  }
-  .outline {
-    outline-style: var(--tw-outline-style);
-    outline-width: 1px;
-  }
 }
 .container {
   max-width: 1240px;
   width: 100%;
+}
+.collection {
+  scrollbar-width: none;
 }
 * {
   margin: 0;
@@ -472,6 +436,108 @@
     height: 32px;
   }
 }
+.box {
+  margin-top: 80px;
+  max-width: 1300px;
+  display: flex;
+  justify-content: center;
+  img {
+    border: 1px solid #ddd;
+    height: 400px;
+  }
+}
+.cards {
+  width: 500px;
+  b {
+    font-size: 36px;
+    padding: 10px 10px;
+    font-weight: 800;
+  }
+}
+.chegirma {
+  display: flex;
+  del {
+    font-size: 16px;
+    padding: 0px 15px;
+    font-weight: 700;
+  }
+  p {
+    display: flex;
+    justify-content: center;
+    background: yellow;
+    max-width: 100px;
+    height: 30px;
+    border-radius: 8px;
+    font-weight: 700;
+    align-items: center;
+  }
+}
+.oy {
+  padding: 10px 10px;
+  border-top: 8px;
+  background: #ddd;
+  border: 1px solid #ddd;
+  width: 260px;
+  margin-top: 20px;
+  margin-left: 10px;
+  strong {
+    font-size: 20px;
+    font-weight: 800;
+  }
+}
+.tolov {
+  margin-left: 10px;
+  display: flex;
+  background: #Ddd;
+  width: 260px;
+  p {
+    font-size: 20px;
+    align-items: center;
+    border-radius: 8px;
+    padding: 5px 5px;
+    font-weight: 800;
+    display: flex;
+    justify-content: center;
+    background: yellow;
+  }
+  b {
+    font-size: 20px;
+  }
+}
+.wrappers {
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  background: #Ddd;
+  width: 280px;
+  padding: 10px 10px;
+}
+.btn {
+  button {
+    width: 280px;
+    background: dodgerblue;
+    height: 40px;
+    border-radius: 8px;
+    font-size: 20px;
+    color: #fff;
+    font-weight: 800;
+  }
+}
+.ditile_page {
+  h1 {
+    font-size: 30px;
+    font-weight: 800;
+    background: #fff;
+  }
+  img {
+    width: 60%;
+    height: 350px;
+    margin-left: 190px;
+  }
+  p {
+    font-size: 20px;
+  }
+}
 @property --tw-rotate-x {
   syntax: "*";
   inherits: false;
@@ -501,11 +567,6 @@
   syntax: "*";
   inherits: false;
 }
-@property --tw-outline-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
-}
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
@@ -516,7 +577,6 @@
       --tw-skew-y: initial;
       --tw-border-style: solid;
       --tw-font-weight: initial;
-      --tw-outline-style: solid;
     }
   }
 }

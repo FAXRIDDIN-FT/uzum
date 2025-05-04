@@ -8,7 +8,7 @@ export async function fetchData(endpoint, callback, callbackSkeleton) {
       callback(data);
     })
     .catch((err) => {
-      console.log(err);
+      console.log(err);f
     })
     .finally(() => {
       callbackSkeleton();
